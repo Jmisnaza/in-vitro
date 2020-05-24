@@ -1,11 +1,9 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin')
+const userController = require('./components/users/UserController.js')
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-exports.helloWorld = functions.https.onRequest((request, response) => {
-  response.send("Hello platzi master");
-});
+admin.initializeApp()
 
-
-
+exports.createUser = functions.auth
+  .user()
+  .onCreate(userController.userCreationController)
